@@ -24,12 +24,12 @@ var CW = 4; // wall
 var CG = 8; // goal
 
 var maze = [
-    [CE,CE,CE,CE,CE,CG],
-    [CE,CS,CE,CW,CE,CE],
-    [CW,CW,CE,CW,CE,CE],
-    [CE,CE,CE,CE,CE,CE],
+    [CE,CW,CS,CE,CE,CE],
     [CE,CE,CE,CE,CW,CS],
-    [CE,CW,CS,CE,CE,CE]
+    [CE,CE,CE,CE,CE,CE],
+    [CW,CW,CE,CW,CE,CE],
+    [CE,CS,CE,CW,CE,CE],
+    [CE,CE,CE,CE,CE,CG]
 ];
 var position = {x: 0, y:0 };
 var direction = 'up';
