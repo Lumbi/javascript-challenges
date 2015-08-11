@@ -102,7 +102,7 @@ function collect() {
         maze[position.y][position.x] = CE;
         print('ロボットが宝石を取った！');
     } else {
-        print('ERROR:　ロボットが何も取らなかった！');
+        print('ERROR:ロボットが何も取らなかった！');
     }
 }
 
