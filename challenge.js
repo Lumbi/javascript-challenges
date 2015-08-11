@@ -4,8 +4,7 @@ function print(message) {
     document.getElementById('results').appendChild(m);
 }
 
-function test(testCase, expectedOutput) {
-    var inputs = arguments.slice(2);
+function test(testCase, expectedOutput, inputs) {
     var output = testCase.call(this, inputs);
     if (output === expectedOutput) {
         print('PASS!');
