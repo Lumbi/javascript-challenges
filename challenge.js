@@ -106,6 +106,17 @@ function collect() {
     }
 }
 
-function testChallenge2() {
+function robotIsAtGoal(){
+    return maze[position.y][position.x] === CG;
+}
 
+function getNumberOfStones() {
+    return stones;
+}
+
+function testChallenge2() {
+    print('ロボットは赤い宝石を三つ集めたか？');
+    test(getNumberOfStones, 3);
+    print('ロボットはゴールに着きましたか？');
+    test(robotIsAtGoal, true);
 }
