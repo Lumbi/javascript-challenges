@@ -84,7 +84,7 @@ function moveForwardOnce() {
 
     if (validPosition) {
         position = newPosition;
-        print('ロボットが前に進んだ！');
+        print('ロボットが前に進んだ！ ' + '(x:'+position.x+', y:'+position.y+')');
     } else {
         print('ERROR: 壁があるのでロボットが前に進まなかった！');
     }
