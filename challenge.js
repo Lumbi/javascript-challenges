@@ -1,15 +1,16 @@
-function print(message) {
+function print(message, className) {
     var m = document.createElement('p');
     m.innerText = message;
+    m.className = className;
     document.getElementById('results').appendChild(m);
 }
 
 function test(testCase, expectedOutput, inputs) {
     var output = testCase.call(this, inputs);
     if (output === expectedOutput) {
-        print('PASS!');
+        print('PASS!', 'pass');
     } else {
-        print('FAIL! 結果：' + output　+ '正解：' + expectedOutput);
+        print('FAIL! 結果：' + output　+ ' -> 正解：' + expectedOutput, 'fail');
     }
 }
 
