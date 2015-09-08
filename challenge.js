@@ -1,8 +1,16 @@
 function print(message, className) {
-    var m = document.createElement('p');
-    m.innerText = message;
-    m.className = className;
-    document.getElementById('results').appendChild(m);
+    if (typeof document !== 'undefined') {
+        var m = document.createElement('p');
+        m.innerText = message;
+        m.className = className;
+        document.getElementById('results').appendChild(m);
+    } else {
+        if (className) {
+            console.log(message + ' <class=' + className + '>');
+        } else {
+            console.log(message);
+        }
+    }
 }
 
 function test(testCase, expectedOutput, inputs) {
@@ -119,4 +127,87 @@ function testChallenge2() {
     test(getNumberOfStones, 3);
     print('ロボットはゴールに着きましたか？');
     test(robotIsAtGoal, true);
+}
+
+//-----------------
+// CHALLENGE 3
+//-----------------
+
+/*
+シーザー暗号突破
+
+このチャレンジはトップシクレットメッセージを復号するチャレンジです。
+現代のテクノロジーには暗号化は非常に不可欠です。
+金融機関の間の振込、内聞のメール、私たちのパスワード…
+それら全部悪いハッカーに隠さないといけない。それは暗号化です。
+
+一番弱い暗号化はシーザー暗号と言います。古代ローマに使われていたと言う。
+当時は帝王から群体へのメッセージは敵に盗られても、敵が読めないように書かれていた。
+シーザー暗号を用いて安心にメッセージを運んでいた。
+
+しかし、
+現代のパソコンで、シーザー暗号で暗号化されたメッセージは、ミリ秒で復号できます。
+
+シーザー暗号はこういうものです：
+
+例えば、このメッセージを暗号したかったら：
+"message"
+文字を一つずつずれたら、
+'a' -> 'b', 'b' -> 'c', ... 'z' -> 'a'
+こんな風になる：
+"message" -> "nfttbhf"
+これは「一個ずれ」。しかし「二個ずれ」にしたら:
+'a' -> 'c', 'b' -> 'd', ... 'z' -> 'b'
+こんな風になる：
+"message" -> "oguucig"
+「何ずれ」は「暗号キー」と言います。暗号キーを分かったら、メッセージを復号できると言うことです。
+
+このチャレンジは、敵のシクレットメッセージを手に入れた。もちろん、敵の暗号キーは分からない。
+
+左のdecryptと言う関数を完成して、シクレットメッセージを復号せよ！
+decryptの入力はmessage（暗号されたメッセージ）、出力は復号されたメッセージ。
+
+HINT:
+これのJavaScriptの機能を勉強したらいい：
+- for loop: ループを使ってメッセージの文字を一つずつ処理できる
+- string.chatAt(position) : stringの中の何番目の文字見れる
+- "hello" + "world" -> "helloworld": stringとstringを+で組み合わせる
+
+*/
+
+var p_secretMessage = "we will attack tokyo tomorrow at noon";
+var p_alphabet = "abcdefghijklmnopqrstuvwxyz";
+var p_key = 17;
+
+function p_encrypt(message) {
+    var encrypted = "";
+    for (var i = 0; i < message.length; i++) {
+        if (message[i] === ' ') {
+            encrypted += ' ';
+        } else {
+            for (var l = 0; l < p_alphabet.length; l++) {
+                if (p_alphabet[l] === message[i]) {
+                    var encryptedChar = p_alphabet[(l + p_key) % p_alphabet.length];
+                    encrypted += encryptedChar;
+                }
+            }
+        }
+    }
+    return encrypted;
+}
+
+var decrypt = function (message) {
+    return message;
+};
+
+var p_encryptedMessage = p_encrypt(p_secretMessage);
+
+function testChallenge3() {
+    if (decrypt !== undefined) {
+        var decryptedMessage = decrypt(p_encryptedMessage);
+        print('暗号メッセージ：　' + p_encryptedMessage);
+        print('復号メッセージ：　' + decryptedMessage, decryptedMessage === p_secretMessage ? 'pass' : 'fail');
+    } else {
+        print('function decryptはundefinedです！　消しちゃったの？', 'fail');
+    }
 }
